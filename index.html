@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ма'мул Ойыны 🕌</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --gold:#F5C842;--gold2:#E8A800;
+  --green:#2ECC71;--green2:#27AE60;
+  --red:#E74C3C;--red2:#C0392B;
+  --blue:#3498DB;--blue2:#2980B9;
+  --purple:#9B59B6;--purple2:#8E44AD;
+  --teal:#1ABC9C;--teal2:#16A085;
+  --bg:#0D1B2A;--bg2:#1A2E42;--bg3:#243B55;
+  --text:#F0F4F8;--text2:#A0B4C8;
+  --card:#1E3246;--card2:#253D56;
+  --radius:16px;--radius-sm:10px;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:0;overflow-y:auto;overflow-x:hidden;transition:opacity .3s,transform .3s;}
+.screen.hidden{opacity:0;pointer-events:none;transform:scale(0.96);}
+
+/* ===== HOME ===== */
+#home{background:linear-gradient(160deg,#0D1B2A 0%,#1A2E42 60%,#0D1B2A 100%);}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle 3s infinite;}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
+.home-inner{position:relative;z-index:1;width:100%;max-width:420px;margin:0 auto;padding:40px 20px 30px;}
+.game-logo{text-align:center;margin-bottom:30px;}
+.logo-ar{font-family:'Amiri',serif;font-size:52px;color:var(--gold);direction:rtl;line-height:1;text-shadow:0 0 30px rgba(245,200,66,.4);}
+.logo-kz{font-size:22px;font-weight:900;color:var(--text);letter-spacing:1px;margin-top:4px;}
+.logo-sub{font-size:13px;color:var(--text2);font-weight:700;margin-top:6px;}
+.player-card{background:var(--card);border-radius:var(--radius);padding:18px 20px;margin-bottom:20px;border:1px solid rgba(255,255,255,.06);}
+.player-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;border:3px solid var(--gold);}
+.player-info{flex:1;}
+.player-name{font-size:16px;font-weight:900;color:var(--text);}
+.player-level{font-size:12px;color:var(--gold);font-weight:800;}
+.xp-bar-wrap{margin-top:6px;}
+.xp-label{font-size:11px;color:var(--text2);font-weight:700;margin-bottom:4px;display:flex;justify-content:space-between;}
+.xp-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.stat-box{background:var(--bg3);border-radius:var(--radius-sm);padding:10px 8px;text-align:center;}
+.stat-val{font-size:20px;font-weight:900;color:var(--gold);}
+.stat-lbl{font-size:10px;color:var(--text2);font-weight:700;margin-top:2px;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.menu-btn{border-radius:var(--radius);padding:18px 14px;border:1px solid rgba(255,255,255,.08);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:transform .15s,background .15s;min-height:100px;active:scale(.97);}
+.menu-btn:active{transform:scale(.96);}
+.menu-btn.primary{grid-column:span 2;background:linear-gradient(135deg,var(--teal),var(--blue));border:none;min-height:72px;flex-direction:row;gap:14px;justify-content:center;}
+.menu-icon{font-size:32px;line-height:1;}
+.menu-lbl{font-size:13px;font-weight:900;color:var(--text);}
+.menu-sub{font-size:10px;color:var(--text2);font-weight:700;}
+.menu-btn.primary .menu-lbl{font-size:18px;}
+.streak-banner{background:linear-gradient(135deg,#7B3F00,#D4680A);border-radius:var(--radius-sm);padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.streak-fire{font-size:28px;}
+.streak-txt{font-size:13px;font-weight:900;color:#FFE0B2;}
+.streak-num{font-size:20px;font-weight:900;color:var(--gold);}
+
+/* ===== CATEGORIES ===== */
+#cats{background:var(--bg);}
+.top-bar{width:100%;max-width:420px;margin:0 auto;padding:50px 20px 16px;display:flex;align-items:center;gap:12px;}
+.back-btn{width:40px;height:40px;border-radius:50%;background:var(--card);border:none;color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.top-title{font-size:18px;font-weight:900;color:var(--text);}
+.cat-list{width:100%;max-width:420px;margin:0 auto;padding:0 20px 30px;}
+.cat-card{border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .15s;border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
+.cat-card:active{transform:scale(.98);}
+.cat-card::before{content:'';position:absolute;inset:0;opacity:.08;}
+.cat-card.marfuu{background:#1A2E1A;}.cat-card.marfuu::before{background:#2ECC71;}
+.cat-card.mansub{background:#1A2040;}.cat-card.mansub::before{background:#3498DB;}
+.cat-card.majrur{background:#2E1A1A;}.cat-card.majrur::before{background:#E74C3C;}
+.cat-card.majzum{background:#231A33;}.cat-card.majzum::before{background:#9B59B6;}
+.cat-card.tabe{background:#1A2A28;}.cat-card.tabe::before{background:#1ABC9C;}
+.cat-icon{font-size:36px;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-card.marfuu .cat-icon{background:rgba(46,204,113,.15);}
+.cat-card.mansub .cat-icon{background:rgba(52,152,219,.15);}
+.cat-card.majrur .cat-icon{background:rgba(231,76,60,.15);}
+.cat-card.majzum .cat-icon{background:rgba(155,89,182,.15);}
+.cat-card.tabe .cat-icon{background:rgba(26,188,156,.15);}
+.cat-info{flex:1;}
+.cat-kz{font-size:16px;font-weight:900;color:var(--text);}
+.cat-ar{font-family:'Amiri',serif;font-size:18px;color:var(--text2);direction:rtl;text-align:left;}
+.cat-count{font-size:11px;font-weight:700;margin-top:3px;}
+.cat-card.marfuu .cat-count{color:#2ECC71;}
+.cat-card.mansub .cat-count{color:#3498DB;}
+.cat-card.majrur .cat-count{color:#E74C3C;}
+.cat-card.majzum .cat-count{color:#9B59B6;}
+.cat-card.tabe .cat-count{color:#1ABC9C;}
+.cat-progress{width:32px;height:32px;position:relative;flex-shrink:0;}
+.cat-progress svg{transform:rotate(-90deg);}
+.cat-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:var(--text);}
+.lock-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.5);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--text2);}
+
+/* ===== QUIZ ===== */
+#quiz{background:var(--bg);}
+.quiz-inner{width:100%;max-width:420px;margin:0 auto;padding:50px 20px 30px;}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.quiz-lives{display:flex;gap:4px;}
+.heart{font-size:20px;transition:transform .3s;}
+.heart.lost{filter:grayscale(1);opacity:.3;transform:scale(.8);}
+.quiz-score{font-size:14px;font-weight:900;color:var(--gold);}
+.progress-track{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-bottom:24px;}
+.progress-done{height:100%;border-radius:4px;transition:width .4s;}
+.q-card{background:var(--card);border-radius:20px;padding:24px 20px;margin-bottom:20px;border:1px solid rgba(255,255,255,.06);min-height:140px;display:flex;flex-direction:column;justify-content:center;}
+.q-type{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;opacity:.7;}
+.q-text{font-size:16px;font-weight:800;color:var(--text);line-height:1.5;}
+.q-ar{font-family:'Amiri',serif;font-size:26px;direction:rtl;text-align:center;margin:12px 0 4px;color:var(--gold);}
+.q-hint{font-size:12px;color:var(--text2);font-weight:700;text-align:center;}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.opt{background:var(--card2);border:2px solid rgba(255,255,255,.08);border-radius:var(--radius-sm);padding:14px 10px;text-align:center;cursor:pointer;transition:all .15s;font-family:'Amiri',serif;font-size:17px;color:var(--text);font-weight:700;direction:rtl;min-height:58px;display:flex;align-items:center;justify-content:center;line-height:1.3;}
+.opt.kz-opt{font-family:'Nunito',sans-serif;font-size:13px;direction:ltr;}
+.opt:active{transform:scale(.97);}
+.opt.correct{background:rgba(46,204,113,.2);border-color:var(--green);color:var(--green);}
+.opt.wrong{background:rgba(231,76,60,.2);border-color:var(--red);color:var(--red);}
+.opt.disabled{pointer-events:none;}
+.feedback-bar{border-radius:var(--radius-sm);padding:14px 18px;margin-top:4px;display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(8px);transition:all .3s;}
+.feedback-bar.show{opacity:1;transform:translateY(0);}
+.feedback-bar.correct{background:rgba(46,204,113,.15);border:1px solid var(--green);}
+.feedback-bar.wrong{background:rgba(231,76,60,.15);border:1px solid var(--red);}
+.fb-icon{font-size:24px;}
+.fb-text{font-size:13px;font-weight:800;color:var(--text);}
+.fb-sub{font-size:11px;color:var(--text2);margin-top:2px;}
+.next-btn{width:100%;margin-top:14px;padding:16px;border-radius:var(--radius);border:none;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;cursor:pointer;transition:transform .15s;display:none;}
+.next-btn.show{display:block;}
+.next-btn:active{transform:scale(.98);}
+.next-btn.correct{background:linear-gradient(135deg,var(--green),var(--teal));color:white;}
+.next-btn.wrong{background:linear-gradient(135deg,var(--red),#FF6B6B);color:white;}
+/* combo */
+.combo-badge{position:fixed;top:80px;right:20px;background:var(--gold);color:#000;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:900;opacity:0;transform:scale(.8) translateY(-10px);transition:all .3s;z-index:200;}
+.combo-badge.show{opacity:1;transform:scale(1) translateY(0);}
+
+/* ===== RESULT ===== */
+#result{background:var(--bg);justify-content:center;}
+.result-inner{width:100%;max-width:420px;margin:0 auto;padding:40px 20px;text-align:center;}
+.result-emoji{font-size:80px;margin-bottom:16px;animation:bounce .6s ease;}
+@keyframes bounce{0%,100%{transform:translateY(0);}40%{transform:translateY(-20px);}}
+.result-title{font-size:28px;font-weight:900;margin-bottom:6px;}
+.result-sub{font-size:14px;color:var(--text2);font-weight:700;margin-bottom:28px;}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+.rs-box{background:var(--card);border-radius:var(--radius-sm);padding:14px 8px;border:1px solid rgba(255,255,255,.06);}
+.rs-val{font-size:24px;font-weight:900;}
+.rs-lbl{font-size:10px;color:var(--text2);font-weight:700;margin-top:4px;}
+.xp-gained{background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(232,168,0,.1));border:1px solid var(--gold2);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.xp-gained-val{font-size:32px;font-weight:900;color:var(--gold);}
+.xp-gained-lbl{font-size:13px;font-weight:800;color:var(--gold2);text-align:left;}
+.action-btns{display:flex;flex-direction:column;gap:10px;}
+.action-btn{padding:15px;border-radius:var(--radius);border:none;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;cursor:pointer;transition:transform .15s;}
+.action-btn:active{transform:scale(.98);}
+.action-btn.primary{background:linear-gradient(135deg,var(--teal),var(--blue));color:white;}
+.action-btn.secondary{background:var(--card);color:var(--text);border:1px solid rgba(255,255,255,.1);}
+
+/* ===== REFERENCE ===== */
+#ref{background:var(--bg);}
+.ref-list{width:100%;max-width:420px;margin:0 auto;padding:0 16px 30px;}
+.ref-section{margin-bottom:20px;}
+.ref-sec-title{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;padding:8px 0;display:flex;align-items:center;gap:8px;}
+.ref-sec-dot{width:10px;height:10px;border-radius:50%;}
+.ref-item{background:var(--card);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:6px;border:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.ri-left{}
+.ri-num{font-size:10px;color:var(--text2);font-weight:800;margin-bottom:2px;}
+.ri-kz{font-size:14px;font-weight:800;color:var(--text);}
+.ri-ar{font-family:'Amiri',serif;font-size:18px;color:var(--text2);direction:rtl;}
+
+/* ===== LEADERBOARD ===== */
+#leaders{background:var(--bg);}
+.lb-list{width:100%;max-width:420px;margin:0 auto;padding:0 16px 30px;}
+.lb-item{background:var(--card);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.05);}
+.lb-item.me{border-color:var(--gold2);background:rgba(245,200,66,.07);}
+.lb-rank{width:28px;font-size:16px;font-weight:900;text-align:center;flex-shrink:0;}
+.lb-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.lb-name{flex:1;font-size:14px;font-weight:800;}
+.lb-xp{font-size:14px;font-weight:900;color:var(--gold);}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--gold);color:#000;border-radius:30px;padding:10px 22px;font-size:14px;font-weight:900;z-index:999;transition:transform .4s cubic-bezier(.4,0,.2,1);white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* XP pop */
+.xp-pop{position:fixed;font-size:18px;font-weight:900;color:var(--gold);pointer-events:none;z-index:500;animation:floatUp .8s ease forwards;}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0);}100%{opacity:0;transform:translateY(-60px);}}
+</style>
+</head>
+<body>
+
+<!-- Stars bg -->
+<div class="stars" id="stars"></div>
+
+<!-- ===== HOME ===== -->
+<div class="screen" id="home">
+<div class="home-inner">
+  <div class="game-logo">
+    <div class="logo-ar">المعمول</div>
+    <div class="logo-kz">МА'МУЛ ОЙЫНЫ</div>
+    <div class="logo-sub">⭐ Арабша грамматиканы ойнай үйрен</div>
+  </div>
+
+  <div class="streak-banner" id="streakBanner">
+    <div class="streak-fire">🔥</div>
+    <div>
+      <div class="streak-txt">Қатарынан</div>
+      <div class="streak-num" id="streakNum">0 күн</div>
+    </div>
+  </div>
+
+  <div class="player-card">
+    <div class="player-header">
+      <div class="avatar">🎓</div>
+      <div class="player-info">
+        <div class="player-name">Оқушы</div>
+        <div class="player-level" id="homeLvl">⚡ 1-деңгей</div>
+      </div>
+    </div>
+    <div class="xp-bar-wrap">
+      <div class="xp-label"><span>Тәжірибе (XP)</span><span id="homeXpLabel">0 / 100</span></div>
+      <div class="xp-bar"><div class="xp-fill" id="homeXpFill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="stats-row" style="margin-bottom:16px;">
+    <div class="stat-box"><div class="stat-val" id="statTotal">0</div><div class="stat-lbl">Барлық XP</div></div>
+    <div class="stat-box"><div class="stat-val" id="statCorrect">0</div><div class="stat-lbl">Дұрыс жауап</div></div>
+    <div class="stat-box"><div class="stat-val" id="statBest">0</div><div class="stat-lbl">Лучший счет</div></div>
+  </div>
+
+  <div class="menu-grid">
+    <button class="menu-btn primary" onclick="goScreen('cats')">
+      <span style="font-size:28px;">⚔️</span>
+      <span class="menu-lbl">Ойын бастау</span>
+    </button>
+    <button class="menu-btn" onclick="goScreen('ref')">
+      <span class="menu-icon">📖</span>
+      <span class="menu-lbl">Анықтамалық</span>
+      <span class="menu-sub">30 ереже</span>
+    </button>
+    <button class="menu-btn" onclick="goScreen('leaders')">
+      <span class="menu-icon">🏆</span>
+      <span class="menu-lbl">Рейтинг</span>
+      <span class="menu-sub">Үздіктер</span>
+    </button>
+    <button class="menu-btn" onclick="startMode('flash')">
+      <span class="menu-icon">⚡</span>
+      <span class="menu-lbl">Жылдам тест</span>
+      <span class="menu-sub">5 сурақ</span>
+    </button>
+    <button class="menu-btn" onclick="startMode('survival')">
+      <span class="menu-icon">💀</span>
+      <span class="menu-lbl">Survival</span>
+      <span class="menu-sub">3 өмір</span>
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- ===== CATEGORIES ===== -->
+<div class="screen hidden" id="cats">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goScreen('home')">←</button>
+    <span class="top-title">Тақырып таңдаңыз</span>
+  </div>
+  <div class="cat-list" id="catList"></div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="screen hidden" id="quiz">
+  <div class="quiz-inner">
+    <div class="quiz-header">
+      <div class="quiz-lives" id="livesRow"></div>
+      <div class="quiz-score">⭐ <span id="qScore">0</span></div>
+    </div>
+    <div class="progress-track"><div class="progress-done" id="qProgress" style="width:0%;background:var(--teal);"></div></div>
+    <div class="q-card" id="qCard">
+      <div class="q-type" id="qType"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-ar" id="qAr"></div>
+      <div class="q-hint" id="qHint"></div>
+    </div>
+    <div class="options" id="optionsGrid"></div>
+    <div class="feedback-bar" id="feedbackBar">
+      <div class="fb-icon" id="fbIcon"></div>
+      <div><div class="fb-text" id="fbText"></div><div class="fb-sub" id="fbSub"></div></div>
+    </div>
+    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Жалғастыру →</button>
+  </div>
+  <div class="combo-badge" id="comboBadge">🔥 COMBO x<span id="comboNum">2</span></div>
+</div>
+
+<!-- ===== RESULT ===== -->
+<div class="screen hidden" id="result">
+<div class="result-inner">
+  <div class="result-emoji" id="resultEmoji">🌟</div>
+  <div class="result-title" id="resultTitle">Керемет!</div>
+  <div class="result-sub" id="resultSub">Барлық сұраққа дұрыс жауап бердіңіз</div>
+  <div class="result-stats">
+    <div class="rs-box"><div class="rs-val" id="rCorrect" style="color:var(--green)">0</div><div class="rs-lbl">Дұрыс</div></div>
+    <div class="rs-box"><div class="rs-val" id="rWrong" style="color:var(--red)">0</div><div class="rs-lbl">Қате</div></div>
+    <div class="rs-box"><div class="rs-val" id="rCombo" style="color:var(--gold)">0</div><div class="rs-lbl">Макс Combo</div></div>
+  </div>
+  <div class="xp-gained">
+    <div style="font-size:32px;">✨</div>
+    <div>
+      <div class="xp-gained-val">+<span id="xpGained">0</span> XP</div>
+      <div class="xp-gained-lbl">Тәжірибе жиналды!</div>
+    </div>
+  </div>
+  <div class="action-btns">
+    <button class="action-btn primary" id="replayBtn" onclick="replayQuiz()">🔄 Қайта ойна</button>
+    <button class="action-btn secondary" onclick="goScreen('cats')">📚 Тақырып өзгерту</button>
+    <button class="action-btn secondary" onclick="goScreen('home')">🏠 Басты бет</button>
+  </div>
+</div>
+</div>
+
+<!-- ===== REFERENCE ===== -->
+<div class="screen hidden" id="ref">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goScreen('home')">←</button>
+    <span class="top-title">Анықтамалық</span>
+  </div>
+  <div class="ref-list" id="refList"></div>
+</div>
+
+<!-- ===== LEADERBOARD ===== -->
+<div class="screen hidden" id="leaders">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goScreen('home')">←</button>
+    <span class="top-title">🏆 Үздіктер тізімі</span>
+  </div>
+  <div class="lb-list" id="lbList"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== DATA ======
+const CATS = [
+  {id:'marfuu', kz:"Марфу'", ar:"المرفوعات", icon:'⬆️', color:'#2ECC71', count:9,
+   items:[
+    {kz:"Фа'ил",ar:"الفاعل",ex:"رَحِمَ اللهُ التَّائِبَ",tr:"Алла тәубе етушіні рақым етті"},
+    {kz:"Наиб фа'ил",ar:"نائب الفاعل",ex:"رُحِمَ التَّائِبُ",tr:"Тәубе етуші рақым етілді"},
+    {kz:"Мубтәдә",ar:"المبتدأ",ex:"مُحَمَّدٌ نَبِيٌّ",tr:"Мұхаммед – пайғамбар"},
+    {kz:"Хабар",ar:"الخبر",ex:"الْقُرْآنُ هُدًى",tr:"Құран – тура жол"},
+    {kz:"Кәнә исмі",ar:"اسم كان",ex:"كَانَ اللهُ عَلِيمًا",tr:"Алла бәрін білуші болды"},
+    {kz:"Иннә хабары",ar:"خبر إنّ",ex:"إِنَّ البَعْثَ حَقٌّ",tr:"Расында, қайта тірілу ақиқат"},
+    {kz:"Нәфи Лә хабары",ar:"خبر لا النافية",ex:"لَا عَمَلَ مُرَاءٍ مَقْبُولٌ",tr:"Риякер амалы қабыл болмайды"},
+    {kz:"Мә/Лә исмі",ar:"اسم ما ولا",ex:"مَا التَّكَبُّرُ لَائِقاً",tr:"Тәкаппарлық лайық емес"},
+    {kz:"Музари' (марфу')",ar:"المضارع المرفوع",ex:"يُحِبُّ اللهُ التَّوَاضُعَ",tr:"Алла кішіпейілділікті жақсы көреді"},
+  ]},
+  {id:'mansub', kz:'Мансуб', ar:'المنصوبات', icon:'⬇️', color:'#3498DB', count:13,
+   items:[
+    {kz:"Мәф'ул мұтлақ",ar:"المفعول المطلق",ex:"تُبْتُ تَوْبَةً نَصُوحاً",tr:"Мен шынайы тәубе еттім"},
+    {kz:"Мәф'ул биһ",ar:"المفعول به",ex:"أَعْبُدُ اللهَ",tr:"Мен Аллаға құлшылық етемін"},
+    {kz:"Мәф'ул фиһ",ar:"المفعول فيه",ex:"صُمْ شَهْرَ رَمَضَانَ",tr:"Рамазан айында ораза ұста"},
+    {kz:"Мәф'ул ләһ",ar:"المفعول له",ex:"اِعْمَلْ طَلَبًا لِمَرْضَاةِ اللهِ",tr:"Алланың ризашылығы үшін жұмыс ет"},
+    {kz:"Мәф'ул ма'аһ",ar:"المفعول معه",ex:"سِرْتُ وَالنَّهْرَ",tr:"Мен өзенмен бірге жүрдім"},
+    {kz:"Халь",ar:"الحال",ex:"جَاءَ الرَّجُلُ رَاكِبًا",tr:"Ер адам мініп келді"},
+    {kz:"Темиз",ar:"التمييز",ex:"طَابَ الأُسْتَاذُ خُلُقًا",tr:"Ұстаздың мінезі жақсы болды"},
+    {kz:"Мүстәснә",ar:"المستثنى",ex:"حَضَرَ الطُّلَّابُ إِلَّا مُحَمَّدًا",tr:"Студенттер келді, Мұхаммеден басқа"},
+    {kz:"Кәнә хабары",ar:"خبر كان",ex:"كَانَ العَمَلُ خَالِصًا",tr:"Амал шынайы болды"},
+    {kz:"Иннә исмі",ar:"اسم إنّ",ex:"إِنَّ العِلْمَ نُورٌ",tr:"Расында, білім – нұр"},
+    {kz:"Нәфи Лә исмі",ar:"اسم لا النافية",ex:"لَا طَاعَةَ مَقْبُولَةٌ بِالرِّيَاءِ",tr:"Риякерлікпен бойсұну қабыл емес"},
+    {kz:"Мә/Лә хабары",ar:"خبر ما ولا",ex:"مَا الغِيبَةُ حَلَالًا",tr:"Ғайбат халал емес"},
+    {kz:"Музари' (мансуб)",ar:"المضارع المنصوب",ex:"أُرِيدُ أَنْ أَعْمَلَ",tr:"Мен жұмыс жасағым келеді"},
+  ]},
+  {id:'majrur', kz:'Мәжрур', ar:'المجرورات', icon:'↙️', color:'#E74C3C', count:2,
+   items:[
+    {kz:"Харф жәрмен",ar:"المجرور بحرف الجر",ex:"اِعْمَلْ بِإِخْلَاصٍ",tr:"Ықыласпен амал ет"},
+    {kz:"Изафет арқылы",ar:"المجرور بالإضافة",ex:"ذَنْبُ العَبْدِ يَسُودُ قَلْبَهُ",tr:"Құлдың күнәсі жүрегін қарайтады"},
+  ]},
+  {id:'majzum', kz:'Мәжзүм', ar:'المجزومات', icon:'✂️', color:'#9B59B6', count:1,
+   items:[
+    {kz:"Музари' (мәжзүм)",ar:"الفعل المضارع المجزوم",ex:"إِنْ تُخْلِصْ يُقْبَلْ عَمَلُكَ",tr:"Ықыласты болсаң, амалың қабыл болады"},
+  ]},
+  {id:'tabe', kz:'Тәбәия', ar:'التبعية', icon:'🔗', color:'#1ABC9C', count:5,
+   items:[
+    {kz:"Сыфат",ar:"النعت",ex:"أَعْبُدُ اللهَ العَظِيمَ",tr:"Мен ұлы Аллаға құлшылық етемін"},
+    {kz:"'Атф",ar:"العطف",ex:"أَطِيعُوا اللهَ وَالرَّسُولَ",tr:"Аллаға және Елшіге бойсұныңдар"},
+    {kz:"Тәкид",ar:"التوكيد",ex:"أَطْلُبْ الإِخْلَاصَ الإِخْلَاصَ",tr:"Ықыласты талап ет, ықыласты!"},
+    {kz:"Бәдәл",ar:"البدل",ex:"اِهْدِنَا الصِّرَاطَ المُسْتَقِيمَ",tr:"Бізді тура жолға бастай гөр"},
+    {kz:"'Атф-ул-баян",ar:"عطف البيان",ex:"آمَنَّا بِنَبِيِّنَا مُحَمَّدٍ",tr:"Біз пайғамбарымыз Мұхаммедке иман келтірдік"},
+  ]},
+];
+
+// ====== STATE ======
+let state = JSON.parse(localStorage.getItem('mamul_state') || 'null') || {
+  xp:0, level:1, streak:0, lastPlay:'', totalCorrect:0, bestScore:0,
+  catProgress:{}
+};
+let quizState = {};
+let currentMode = 'normal'; // normal | flash | survival
+
+function saveState(){ localStorage.setItem('mamul_state', JSON.stringify(state)); }
+
+// ====== INIT ======
+function init(){
+  genStars();
+  updateDate();
+  updateHomeUI();
+  buildCats();
+  buildRef();
+  buildLeaderboard();
+}
+
+function updateDate(){
+  const today = new Date().toDateString();
+  if(state.lastPlay && state.lastPlay !== today){
+    const yesterday = new Date(Date.now()-86400000).toDateString();
+    if(state.lastPlay !== yesterday) state.streak = 0;
+  }
+}
+
+function genStars(){
+  const s = document.getElementById('stars');
+  for(let i=0;i<50;i++){
+    const d = document.createElement('div');
+    d.className = 'star';
+    const size = Math.random()*2+1;
+    d.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s;`;
+    s.appendChild(d);
+  }
+}
+
+function updateHomeUI(){
+  const XP_PER_LEVEL = 100;
+  const level = Math.floor(state.xp / XP_PER_LEVEL) + 1;
+  const xpInLevel = state.xp % XP_PER_LEVEL;
+  state.level = level;
+  document.getElementById('homeLvl').textContent = `⚡ ${level}-деңгей`;
+  document.getElementById('homeXpLabel').textContent = `${xpInLevel} / ${XP_PER_LEVEL}`;
+  document.getElementById('homeXpFill').style.width = (xpInLevel / XP_PER_LEVEL * 100) + '%';
+  document.getElementById('statTotal').textContent = state.xp;
+  document.getElementById('statCorrect').textContent = state.totalCorrect;
+  document.getElementById('statBest').textContent = state.bestScore;
+  document.getElementById('streakNum').textContent = state.streak + ' күн';
+}
+
+function buildCats(){
+  const el = document.getElementById('catList');
+  el.innerHTML = '';
+  CATS.forEach(cat => {
+    const prog = state.catProgress[cat.id] || 0;
+    const pct = Math.round((prog / cat.count) * 100);
+    el.innerHTML += `
+    <div class="cat-card ${cat.id}" onclick="startQuiz('${cat.id}')">
+      <div class="cat-icon">${cat.icon}</div>
+      <div class="cat-info">
+        <div class="cat-kz">${cat.kz}</div>
+        <div class="cat-ar">${cat.ar}</div>
+        <div class="cat-count">${cat.count} түр</div>
+      </div>
+      <div class="cat-progress">
+        <svg width="32" height="32" viewBox="0 0 32 32">
+          <circle cx="16" cy="16" r="13" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3"/>
+          <circle cx="16" cy="16" r="13" fill="none" stroke="${cat.color}" stroke-width="3"
+            stroke-dasharray="${2*Math.PI*13}" stroke-dashoffset="${2*Math.PI*13*(1-pct/100)}"
+            stroke-linecap="round"/>
+        </svg>
+        <div class="cat-pct">${pct}%</div>
+      </div>
+    </div>`;
+  });
+}
+
+function buildRef(){
+  const el = document.getElementById('refList');
+  el.innerHTML = '';
+  CATS.forEach(cat => {
+    let html = `<div class="ref-section">
+      <div class="ref-sec-title">
+        <div class="ref-sec-dot" style="background:${cat.color};"></div>
+        ${cat.kz} — ${cat.ar}
+      </div>`;
+    cat.items.forEach((item,i) => {
+      html += `<div class="ref-item">
+        <div class="ri-left">
+          <div class="ri-num">${i+1}. түр</div>
+          <div class="ri-kz">${item.kz}</div>
+        </div>
+        <div class="ri-ar">${item.ar}</div>
+      </div>`;
+    });
+    html += '</div>';
+    el.innerHTML += html;
+  });
+}
+
+function buildLeaderboard(){
+  const fakeUsers = [
+    {name:'Айгерім 🌟', xp:540, av:'👩'},
+    {name:'Нурлан ⚡', xp:380, av:'👨'},
+    {name:'Зарина 🌙', xp:320, av:'👩'},
+    {name:'Алмас 🔥', xp:280, av:'👦'},
+    {name:'Оқушы (Сіз)', xp:state.xp, av:'🎓', me:true},
+    {name:'Диас 📚', xp:150, av:'👦'},
+    {name:'Гүлнара ✨', xp:90, av:'👩'},
+  ];
+  fakeUsers.sort((a,b)=>b.xp-a.xp);
+  const el = document.getElementById('lbList');
+  el.innerHTML = '';
+  const medals = ['🥇','🥈','🥉'];
+  fakeUsers.forEach((u,i) => {
+    el.innerHTML += `<div class="lb-item${u.me?' me':''}">
+      <div class="lb-rank">${medals[i] || (i+1)}</div>
+      <div class="lb-av" style="background:${u.me?'linear-gradient(135deg,var(--teal),var(--blue))':'var(--bg3)'};">${u.av}</div>
+      <div class="lb-name">${u.name}</div>
+      <div class="lb-xp">${u.xp} XP</div>
+    </div>`;
+  });
+}
+
+// ====== QUIZ ======
+function startMode(mode){
+  currentMode = mode;
+  if(mode === 'flash'){
+    // random 5 questions from all categories
+    const allItems = [];
+    CATS.forEach(cat => cat.items.forEach(item => allItems.push({...item, catId:cat.id})));
+    shuffle(allItems);
+    beginQuiz(allItems.slice(0,5), 'Жылдам тест ⚡', '#F5C842');
+  } else if(mode === 'survival'){
+    const allItems = [];
+    CATS.forEach(cat => cat.items.forEach(item => allItems.push({...item, catId:cat.id})));
+    shuffle(allItems);
+    beginQuiz(allItems, 'Survival 💀', '#E74C3C', 3);
+  }
+}
+
+function startQuiz(catId){
+  currentMode = 'normal';
+  const cat = CATS.find(c=>c.id===catId);
+  const items = [...cat.items];
+  shuffle(items);
+  beginQuiz(items, cat.kz + ' ' + cat.icon, cat.color, Infinity, catId);
+  goScreen('quiz');
+}
+
+function beginQuiz(items, title, color, lives=Infinity, catId=null){
+  quizState = {
+    items, title, color,
+    maxLives: lives===Infinity ? 999 : lives,
+    lives: lives===Infinity ? 999 : lives,
+    catId,
+    index: 0,
+    score: 0,
+    correct: 0,
+    wrong: 0,
+    combo: 0,
+    maxCombo: 0,
+    totalXp: 0,
+  };
+  document.getElementById('qProgress').style.background = color;
+  renderQuestion();
+  goScreen('quiz');
+}
+
+function buildOptions(correct, all){
+  // pick 3 wrong options
+  const pool = all.filter(i=>i.ar !== correct.ar);
+  shuffle(pool);
+  const wrong = pool.slice(0,3);
+  const opts = [correct, ...wrong];
+  shuffle(opts);
+  return opts;
+}
+
+function buildKzOptions(correct, all){
+  const pool = all.filter(i=>i.kz !== correct.kz);
+  shuffle(pool);
+  const wrong = pool.slice(0,3);
+  const opts = [correct, ...wrong];
+  shuffle(opts);
+  return opts;
+}
+
+function renderQuestion(){
+  const qs = quizState;
+  const item = qs.items[qs.index];
+  const total = qs.items.length;
+  const allItems = CATS.flatMap(c=>c.items);
+
+  // lives
+  const livesRow = document.getElementById('livesRow');
+  livesRow.innerHTML = '';
+  if(qs.maxLives < 10){
+    for(let i=0;i<qs.maxLives;i++){
+      const h = document.createElement('div');
+      h.className = 'heart' + (i >= qs.lives ? ' lost' : '');
+      h.textContent = '❤️';
+      livesRow.appendChild(h);
+    }
+  } else {
+    livesRow.innerHTML = `<span style="font-size:13px;font-weight:800;color:var(--text2);">${qs.title}</span>`;
+  }
+
+  document.getElementById('qScore').textContent = qs.score;
+  document.getElementById('qProgress').style.width = (qs.index/total*100)+'%';
+
+  // pick question type randomly
+  const qTypes = ['ar2kz','kz2ar','example2kz'];
+  const qType = qTypes[Math.floor(Math.random()*qTypes.length)];
+
+  document.getElementById('feedbackBar').className = 'feedback-bar';
+  document.getElementById('nextBtn').className = 'next-btn';
+
+  let qTypeLabel='', qText='', qAr='', qHint='', opts=[], isKz=false;
+
+  if(qType==='ar2kz'){
+    qTypeLabel = '🔤 Арабша атауды анықта';
+    qText = 'Мына ма\'мул қалай аталады?';
+    qAr = item.ar;
+    qHint = '👆 Қазақша атауын таңдаңыз';
+    opts = buildKzOptions(item, allItems);
+    isKz = true;
+  } else if(qType==='kz2ar'){
+    qTypeLabel = '📖 Арабша жаз';
+    qText = `«${item.kz}» — арабша қалай?`;
+    qAr = '';
+    qHint = '👆 Арабша атауын таңдаңыз';
+    opts = buildOptions(item, allItems);
+    isKz = false;
+  } else {
+    qTypeLabel = '💡 Мысалдан анықта';
+    qText = 'Бұл мысалда қандай ма\'мул бар?';
+    qAr = item.ex;
+    qHint = `"${item.tr}"`;
+    opts = buildKzOptions(item, allItems);
+    isKz = true;
+  }
+
+  document.getElementById('qType').textContent = qTypeLabel;
+  document.getElementById('qText').textContent = qText;
+  document.getElementById('qAr').textContent = qAr;
+  document.getElementById('qHint').textContent = qHint;
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt' + (isKz?' kz-opt':'');
+    btn.textContent = isKz ? opt.kz : opt.ar;
+    btn.dataset.correct = (isKz ? opt.kz===item.kz : opt.ar===item.ar) ? '1' : '0';
+    btn.onclick = () => handleAnswer(btn, item, isKz);
+    grid.appendChild(btn);
+  });
+
+  quizState.currentItem = item;
+}
+
+function handleAnswer(btn, item, isKz){
+  const isCorrect = btn.dataset.correct === '1';
+  document.querySelectorAll('.opt').forEach(b => {
+    b.classList.add('disabled');
+    if(b.dataset.correct==='1') b.classList.add('correct');
+  });
+
+  const fb = document.getElementById('feedbackBar');
+  const nextBtn = document.getElementById('nextBtn');
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    quizState.combo++;
+    quizState.correct++;
+    if(quizState.combo > quizState.maxCombo) quizState.maxCombo = quizState.combo;
+    const xp = 10 + (quizState.combo > 1 ? quizState.combo * 3 : 0);
+    quizState.score += xp;
+    quizState.totalXp += xp;
+    fb.className = 'feedback-bar correct show';
+    document.getElementById('fbIcon').textContent = quizState.combo > 2 ? '🔥' : '✅';
+    document.getElementById('fbText').textContent = quizState.combo > 1 ? `COMBO x${quizState.combo}! +${xp} XP` : `Дұрыс! +${xp} XP`;
+    document.getElementById('fbSub').textContent = item.kz + ' — ' + item.ar;
+    nextBtn.className = 'next-btn correct show';
+    nextBtn.textContent = quizState.index+1 >= quizState.items.length ? '🏆 Нәтиже' : 'Жалғастыру →';
+    if(quizState.combo >= 2) showCombo(quizState.combo);
+    spawnXP('+'+xp+' XP');
+    document.getElementById('qScore').textContent = quizState.score;
+  } else {
+    btn.classList.add('wrong');
+    quizState.combo = 0;
+    quizState.wrong++;
+    if(quizState.maxLives < 10) quizState.lives--;
+    fb.className = 'feedback-bar wrong show';
+    document.getElementById('fbIcon').textContent = '❌';
+    document.getElementById('fbText').textContent = 'Қате! Дұрыс жауап:';
+    document.getElementById('fbSub').textContent = item.kz + ' ← ' + item.ar;
+    nextBtn.className = 'next-btn wrong show';
+    nextBtn.textContent = quizState.lives <= 0 ? '💀 Ойын аяқталды' : (quizState.index+1 >= quizState.items.length ? '🏆 Нәтиже' : 'Жалғастыру →');
+
+    const hearts = document.querySelectorAll('.heart');
+    if(quizState.maxLives < 10 && quizState.lives < quizState.maxLives){
+      const lostIdx = quizState.maxLives - quizState.lives - 1;
+      if(hearts[lostIdx]) hearts[lostIdx].classList.add('lost');
+    }
+  }
+}
+
+function nextQuestion(){
+  const qs = quizState;
+  // check game over
+  if(qs.maxLives < 10 && qs.lives <= 0){
+    showResult();
+    return;
+  }
+  qs.index++;
+  if(qs.index >= qs.items.length){
+    showResult();
+    return;
+  }
+  renderQuestion();
+}
+
+function showResult(){
+  const qs = quizState;
+  // save state
+  state.xp += qs.totalXp;
+  state.totalCorrect += qs.correct;
+  if(qs.score > state.bestScore) state.bestScore = qs.score;
+  const today = new Date().toDateString();
+  if(state.lastPlay !== today){
+    state.streak++;
+    state.lastPlay = today;
+  }
+  if(qs.catId){
+    state.catProgress[qs.catId] = Math.max(state.catProgress[qs.catId]||0, qs.correct);
+  }
+  saveState();
+  updateHomeUI();
+  buildCats();
+  buildLeaderboard();
+
+  const pct = qs.correct / Math.max(qs.index,1) * 100;
+  let emoji = '😅', title = 'Жалғастырыңыз!', sub = 'Тағы бір рет жаттығыңыз керек';
+  if(pct >= 90){ emoji='🏆'; title='Тамаша нәтиже!'; sub='Сіз нағыз шебер грамматик!'; }
+  else if(pct >= 70){ emoji='⭐'; title='Жақсы!'; sub='Сіз жақсы білесіз, тағы жаттықтырыңыз'; }
+  else if(pct >= 50){ emoji='📚'; title='Болады!'; sub='Жақсы жаттықтырсаңыз болады'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent = sub;
+  document.getElementById('rCorrect').textContent = qs.correct;
+  document.getElementById('rWrong').textContent = qs.wrong;
+  document.getElementById('rCombo').textContent = qs.maxCombo;
+  document.getElementById('xpGained').textContent = qs.totalXp;
+
+  goScreen('result');
+  hideComboBadge();
+}
+
+function replayQuiz(){
+  if(quizState.catId){
+    startQuiz(quizState.catId);
+  } else if(currentMode==='flash'){
+    startMode('flash');
+  } else {
+    startMode('survival');
+  }
+}
+
+function showCombo(n){
+  const cb = document.getElementById('comboBadge');
+  document.getElementById('comboNum').textContent = n;
+  cb.classList.add('show');
+  setTimeout(()=>cb.classList.remove('show'), 1800);
+}
+
+function hideComboBadge(){
+  document.getElementById('comboBadge').classList.remove('show');
+}
+
+function spawnXP(txt){
+  const el = document.createElement('div');
+  el.className = 'xp-pop';
+  el.textContent = txt;
+  el.style.cssText = `left:${40+Math.random()*20}%;top:40%;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 900);
+}
+
+// ====== NAVIGATION ======
+function goScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>{
+    s.classList.toggle('hidden', s.id !== id);
+  });
+}
+
+// ====== TOAST ======
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ====== UTILS ======
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+init();
+if(state.xp === 0 && state.streak === 0) setTimeout(()=>showToast('🕌 Ма\'мул ойынына қош келдіңіз!'), 600);
+</script>
+</body>
+</html>
