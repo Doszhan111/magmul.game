@@ -1,0 +1,1 @@
+# magmul.game
